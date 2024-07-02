@@ -17,17 +17,17 @@ on:
       destination_scope:
         description: '目标Scope (格式 scope)'
         required: true
-        default: ''
+        default: 'jasper94/'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
     - name: Sync Docker Images
-      uses: zhaojh10010/docker-sync-action@main
+      uses: zhaojh10010/sync-docker-image@main
       with:
         source: ${{ github.event.inputs.source }}
         source-credential: ${{ secrets.SOURCE_CREDENTIAL }}
         destination: ${{ github.event.inputs.destination }}
         destination-credential: ${{ secrets.DESTINATION_CREDENTIAL }}
-        sync: "${{ github.event.inputs.source_repo }} jasper94/${{ github.event.inputs.destination_scope }}"
+        sync: "${{ github.event.inputs.source_repo }} ${{ github.event.inputs.destination_scope }}"
