@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Sync Docker Images
-      uses: zhaojh10010/sync-docker-image@main
+      uses: zhaojh10010/docker-sync-action@main
       with:
         source: ${{ github.event.inputs.source }}
         source-credential: ${{ secrets.SOURCE_CREDENTIAL }}
