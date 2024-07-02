@@ -9,7 +9,7 @@ on:
       destination:
         description: '目标源 (Registry)'
         required: true
-        default: 'registry.cn-beijing.aliyuncs.com'
+        default: 'registry.cn-chengdu.aliyuncs.com'
       source_repo:
         description: '仓库及标签 (格式 repo:tag)'
         required: true
@@ -28,6 +28,6 @@ jobs:
       with:
         source: ${{ github.event.inputs.source }}
         source-credential: ${{ secrets.SOURCE_CREDENTIAL }}
-        destination: ${{ github.event.inputs.destination }}
+        destination: jasper94/${{ github.event.inputs.destination }}
         destination-credential: ${{ secrets.DESTINATION_CREDENTIAL }}
-        copy: "${{ github.event.inputs.source_repo }} ${{ github.event.inputs.destination_repo }}"
+        copy: "${{ github.event.inputs.source_repo }} jasper94/${{ github.event.inputs.destination_repo }}"
