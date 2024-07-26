@@ -10,7 +10,7 @@ on:
       destination:
         description: '目标源 (Registry)'
         required: true
-        default: 'registry.cn-beijing.aliyuncs.com'
+        default: 'registry.cn-chengdu.aliyuncs.com'
       source_repo:
         description: '仓库 (格式 repo)'
         required: true
@@ -18,14 +18,14 @@ on:
       destination_scope:
         description: '目标Scope (格式 scope)'
         required: true
-        default: ''
+        default: 'jasper94/'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
     - name: Sync Docker Images
-      uses: ikrong/docker-sync-action@main
+      uses: zhaojh10010/sync-docker-image@main
       with:
         source: ${{ github.event.inputs.source }}
         source-credential: ${{ secrets.SOURCE_CREDENTIAL }}
