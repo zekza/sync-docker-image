@@ -1,0 +1,44 @@
+name: 'Sync Docker Images'
+description: 'Sync Docker Images between Registries'
+branding:
+  icon: 'archive'
+  color: 'green'
+inputs:
+  source:
+    description: 'Source Registry'
+    required: true
+    default: 'docker.io'
+  source-credential:
+    description: 'Source Registry Credential. For example: username:password'
+    required: false
+  destination:
+    description: 'Destination Registry'
+    required: true
+  destination-credential:
+    description: 'Destination Registry Credential. For example: username:password'
+    required: false
+  sync:
+    description: 'Repos for Sync (Support Multiple Lines). For example: nginx ikrong This will sync nginx and all tags to ikrong, such as ikrong/nginx:latest'
+    required: false
+  copy:
+    description: 'Repos for Copy (Support Multiple Lines). For example: nginx:latest ikrong/nginx:1.11.3 This will only copy nginx:latest to ikrong/nginx:1.11.3'
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - name: Sync Docker Images
+      run: sync.sh
+      shell: bash
+      env:
+        SOURCE: ${{ inputs.source }}
+        SOURCE_CREDENTIAL: ${{ inputs.source-credential }}
+        DESTINATION: ${{ inputs.destination }}
+        DESTINATION_CREDENTIAL: ${{ inputs.destination-credential }}
+        SYNC: ${{ inputs.sync }}
+        COPY: ${{ inputs.copy }}
